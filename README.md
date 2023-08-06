@@ -2,6 +2,8 @@
 
 A `proxy` based wrapper around the IndexedDB API to facilitate simple `async` and `await` style coding practices.
 
+**NOTE**: This is a very limited package for basic usage. If you want more control, I suggest use [idb](https://github.com/jakearchibald/idb).
+
 ```js
 import { idb } from "proxidb";
 
