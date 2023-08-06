@@ -5,16 +5,23 @@ A `proxy` based wrapper around the IndexedDB API to facilitate simple `async` an
 ```js
 import { idb } from "proxidb";
 
-function myUpgradeFunction() {}
+// Create a "todos" store
+function myUpgradeFunction(event) {
+  const db = event.target.result;
+  if (!db.objectStoreNames.contains("todos"))
+    db.createObjectStore("todos", { keyPath: "id" });
+}
 
 async function doStuff() {
   const db = await idb("name", 1, myUpgradeFunction);
-  const store = db.getStore("todos", "readwrite");
-  await store.add({ id: "1", title: "test" });
-  const res = await store.get("1");
+  // you can directly access stores in the API
+  await db.todos.add({ id: "1", title: "test" });
+  const result = db.todos.get("1");
+  // Close it after each action (or not...)
+  db.close();
 }
 ```
 
 ## Notes
 
-- After each transaction (e.g. `get`, `getAll`, `add`, `put`, `delete`) the connection is closed.
+- Default mode for transactions is `readwrite`. There is currently no way to change this.

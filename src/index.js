@@ -1,26 +1,25 @@
-const getStore = function (db) {
-  return function (name, type = "readwrite") {
-    const set = () => true;
-
-    const s = db.transaction(name, type).objectStore(name);
-    // closes the connection after the transaction is completed
-    db.close();
+function dbGetHandler(db, key) {
+  // first tries to get the store. if store does not exist
+  // for key, invoke the normal db[key]
+  try {
+    const store = db.transaction(key, "readwrite").objectStore(key);
 
     function get(_, method) {
       return async function (...args) {
         return new Promise((resolve, reject) => {
-          if (!s[method]) reject("Method not supported");
-
-          const request = s[method](...args);
+          if (!store[method]) reject("Method not supported");
+          const request = store[method](...args);
           request.onsuccess = () => resolve(request.result);
           request.onerror = () => reject(request.error);
         });
       };
     }
 
-    return new Proxy({}, { get, set });
-  };
-};
+    return new Proxy({}, { get });
+  } catch (e) {
+    return db[key];
+  }
+}
 
 export async function idb(name, version, upgrade) {
   return new Promise(function (resolve, reject) {
@@ -29,8 +28,7 @@ export async function idb(name, version, upgrade) {
 
     connection.onsuccess = (event) => {
       const db = connection.result;
-      db.getStore = getStore(db);
-      resolve(db);
+      resolve(new Proxy(db, { get: dbGetHandler }));
     };
     // Return the errors
     connection.onerror = (event) => {
