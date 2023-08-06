@@ -1,0 +1,23 @@
+{
+	"extends": ["plugin:prettier/recommended"],
+	"plugins": ["prettier"],
+	"env": {
+		"browser": true,
+		"node": true,
+		"jest": true,
+	},
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module",
+	},
+	"rules": {
+		"prettier/prettier": "error",
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"moduleDirectory": ["node_modules", "src/"],
+			},
+		},
+	},
+}

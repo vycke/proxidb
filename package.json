@@ -1,0 +1,43 @@
+{
+  "name": "proxidb",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "IndexedDB async-await wrapper",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:coverage": "vitest --coverage",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
+    "format": "npm run prettier -- --list-different",
+    "lint": "eslint --ignore-path .gitignore .",
+    "validate": "npm-run-all --parallel lint prettier test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevtiq/proxidb.git"
+  },
+  "keywords": [
+    "fetch"
+  ],
+  "author": "Kevin Pennekamp <kevin@crinkles.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevtiq/proxidb/issues"
+  },
+  "homepage": "https://github.com/kevtiq/proxidb#readme",
+  "devDependencies": {
+    "@vitest/coverage-istanbul": "^0.34.1",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "fake-indexeddb": "^4.0.2",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.0.1",
+    "vite": "^4.4.8",
+    "vitest": "^0.34.1"
+  },
+  "dependencies": {}
+}
