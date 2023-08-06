@@ -33,8 +33,6 @@ export async function idb(name, version, upgrade) {
       resolve(new Proxy(db, { get: dbGetHandler }));
     };
 
-    connection.onerror = (event) => {
-      reject(event.target.errorCode);
-    };
+    connection.onerror = (event) => reject(event.target.errorCode);
   });
 }

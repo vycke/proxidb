@@ -15,11 +15,12 @@ function myUpgradeFunction(event) {
 }
 
 async function doStuff() {
+  // open a connection
   const db = await idb("name", 1, myUpgradeFunction);
-  // you can directly access stores in the API
+  // do one or more transactions
   await db.todos.add({ id: "1", title: "test" });
-  const result = db.todos.get("1");
-  // Close it after each action (or not...)
+  const result = await db.todos.get("1");
+  // Close the connection
   db.close();
 }
 ```
@@ -27,3 +28,4 @@ async function doStuff() {
 ## Notes
 
 - Default mode for transactions is `readwrite`. There is currently no way to change this.
+- Requires closing of the connection. Otherwise a vast number of connections will remain open.

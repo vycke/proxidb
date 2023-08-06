@@ -25,7 +25,7 @@ test("Undefined method", async () => {
   await expect(store.jabber()).rejects.toBe("Method not supported");
 });
 
-test("add & get", async () => {
+test("transactions", async () => {
   await db.todos.add({ id: "1", name: "test" });
   const res1 = await db.todos.get("1");
   expect(res1).toEqual({ id: "1", name: "test" });
