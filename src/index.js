@@ -28,7 +28,7 @@ export async function idb(name, version, upgrade) {
     const connection = indexedDB.open(name, version);
     connection.onupgradeneeded = upgrade;
 
-    connection.onsuccess = (event) => {
+    connection.onsuccess = () => {
       const db = connection.result;
       resolve(new Proxy(db, { get: dbGetHandler }));
     };

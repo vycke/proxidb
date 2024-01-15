@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kevtiq/proxidb.git"
+    "url": "git+https://github.com/vyckes/proxidb.git"
   },
   "keywords": [
     "fetch"
@@ -25,9 +25,9 @@
   "author": "Kevin Pennekamp <kevin@crinkles.dev>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kevtiq/proxidb/issues"
+    "url": "https://github.com/vyckes/proxidb/issues"
   },
-  "homepage": "https://github.com/kevtiq/proxidb#readme",
+  "homepage": "https://github.com/vyckes/proxidb#readme",
   "devDependencies": {
     "@vitest/coverage-istanbul": "^0.34.1",
     "eslint": "^8.46.0",
